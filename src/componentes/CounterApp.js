@@ -1,15 +1,16 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
+import { HijoCounterApp } from './HijoCounterApp'
 
 const CounterApp = ({value}) => {
 
-    const [counter, setCounter] = useState(value)
+    const [counter, setCounter] = useState(value)        
 
-    const manejarEvento = (e) => {
+    const incremento = (e) => {
         console.log(e)
         setCounter((counter) => counter + 1)
     }
-    const substract = (e) => {
+    const reset = (e) => {
         console.log(e)
         setCounter((counter) => value)
     }
@@ -17,10 +18,9 @@ const CounterApp = ({value}) => {
 
     return (
         <>
-            <h1>CounterApp</h1>
-            <h2> { counter } </h2>
-            <button  onClick={manejarEvento}>+1</button>
-            <button  onClick={substract}>Reset</button>
+            <HijoCounterApp counter = {counter}/>
+            <button  onClick={incremento}>+1</button>
+            <button  onClick={reset}>Reset</button>
             <button  onClick={() => setCounter((counter) => counter - 1)}>-1</button>
         </>
     )

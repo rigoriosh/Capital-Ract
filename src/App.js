@@ -1,8 +1,9 @@
 
 import './App.css';
+import Test from './componentes/Test';
 
 function App() {
-  return <h1>hola</h1>
+  return <Test a = 'rigo'/>
 }
 
 export default App;
