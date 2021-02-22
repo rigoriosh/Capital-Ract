@@ -1,14 +1,12 @@
 import React from 'react'
-//import { NoteScreen } from '../note/NoteScreen'
-//import { NothingSelected } from './NothingSelected'
-//import { Sidebar } from './Sidebar'
+import { NavBar } from './NavBar'
+
 
 export const HomeScreen = () => {
     return (
-        <div className="">
+        
 
-            Home
+            <NavBar/>
           
-        </div>
     )
 }
