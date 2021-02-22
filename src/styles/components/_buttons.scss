@@ -1,4 +1,8 @@
-.btn{
+.colorBtn{
+    background-color: $primary;
+}
+
+.btns{
     background-color: transparent;
     border: none;
     color: aliceblue;
@@ -17,7 +21,7 @@
     }
 }
 
-.btn-primary{
+.btns-primary{
     background-color: $primary;
     border-radius: 4px;
     &:disabled{
@@ -28,11 +32,11 @@
     }
 }
 
-.btn-block{
+.btns-block{
     width: 100%;
 }
 
-.google-btn {
+.google-btns {
     cursor: pointer;
     margin-top: 5px;
     width: 100%;
@@ -59,7 +63,7 @@
         width: 18px;
         height: 18px;
     }
-    .btn-text {
+    .btns-text {
         float: right;
         margin: 11px 40px 0 0;
         color: $white;

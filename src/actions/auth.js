@@ -1,6 +1,9 @@
 import { tipos } from "../types/tipos"
 import {firebase, googleAuthProvider} from '../firebase/firebaseConfig';
 import { finishLoading, startLoading } from "./ui";
+import Swal from 'sweetalert2';
+
+
 
 export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
@@ -15,12 +18,9 @@ export const startLoginEmailPassword = (email, password) => {
             })
             .catch(e => {
                 console.log(e)
-                dispatch(finishLoading())
+                dispatch(finishLoading());
+                Swal.fire('Error', e.message, 'error');
             })
-
-        /* setTimeout(() => {
-            dispatch(login(email, password));
-        }, 3500); */
 
     }
 }
@@ -40,23 +40,28 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
             .then(async({user}) => {
                 await user.updateProfile({displayName: name});
                 console.log(user);
-                dispatch(
-                    login(user.uid, user.displayName)
-                )
+                dispatch(login(user.uid, user.displayName));
             })
             .catch(e => {
                 console.log(e)
+                Swal.fire('Error', e.message, 'error');
             })
     }
 }
 
 
 export const startGoogleLogin = () => {
+    
     return (dispatch) => {
+        
         firebase.auth().signInWithPopup(googleAuthProvider)
             .then( resp => {
                 const {user} = resp;
-                dispatch(login(user.uid, user.displayName))
+                dispatch(login(user.uid, user.displayName));
+                
+            })
+            .catch(e => {
+                Swal.fire('Error', e.message, 'error');
             })
     }
 } 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import validator from 'validator';
 import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
 import { removeErrorAction, setErrorAction } from '../../actions/ui';
-import { useForm } from '../../hooks/useForm'
+import { useForm } from '../../hooks/useForm';
 
 export const LoginScreen = () => {
 
@@ -14,7 +14,7 @@ export const LoginScreen = () => {
 
     const [fields, handledInputChange] = useForm(
         {
-            email:'nando@gmail.com',
+            email:'RigobertoRiosH@hotmail.com',
             password: '123456'
         });
     const {email, password} = fields;

@@ -12,26 +12,24 @@ import PrivateRoute from './PrivateRoute';
 export const AppRouter = () => {
 
     const dispatch = useDispatch();
-
     const [checkingLogin, setChecking] = useState(false);    
     const [isLogin, setisLogin] = useState(false)
 
-    useEffect(() => {
+    useEffect(() => {        
         firebase.auth().onAuthStateChanged((user) => {
             console.log(user);
+            setChecking(true);
             if (user?.uid) {
-                dispatch(login(user.uid, user.displayName));
-                setChecking(true);
+                dispatch(login(user.uid, user.displayName));                
                 setisLogin(true);
-            }else{
-                setChecking(false);
+            }else{                
                 setisLogin(false);
             }
         });
 
     }, [dispatch, setChecking])
 
-    if (checkingLogin) {
+    if (!checkingLogin) {
         return (
             <h1>Waiting ....</h1>
         )
@@ -43,7 +41,7 @@ export const AppRouter = () => {
                 <Switch>
                     <PublicRout isAuthenticated={isLogin} path="/auth" component={AuthRouter}/>
                     <PrivateRoute exact isAuthenticated={isLogin} path="/" component={HomeScreen}/>                    
-                    <Redirect to="/auth/login"/>
+                    <Redirect to="/auth"/>
                 </Switch>
             </div>            
         </Router>
