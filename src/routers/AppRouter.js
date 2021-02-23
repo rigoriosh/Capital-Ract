@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
-import { HomeScreen } from '../componentes/HomeScreen';
+import { HomeRouter } from '../componentes/HomeRouter';
 import { AuthRouter } from './AuthRouter';
 import {firebase} from '../firebase/firebaseConfig';
 import { useDispatch } from 'react-redux';
@@ -40,7 +40,7 @@ export const AppRouter = () => {
             <div>
                 <Switch>
                     <PublicRout isAuthenticated={isLogin} path="/auth" component={AuthRouter}/>
-                    <PrivateRoute exact isAuthenticated={isLogin} path="/" component={HomeScreen}/>                    
+                    <PrivateRoute  isAuthenticated={isLogin} path="/" component={HomeRouter}/>                    
                     <Redirect to="/auth"/>
                 </Switch>
             </div>            
