@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { startLogOut } from '../actions/auth';
 
-export const NavBar = () => {
+export const NavBar = ({rol}) => {
+
+    console.log('rol => ', rol);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -16,10 +18,13 @@ export const NavBar = () => {
         console.log('test');
         history.replace('/bar');
     }
+
+    //const [rol, setRol] = useState('');
     return (
         <>
             <div className="menu-wrap">
                 <input type="checkbox" className="toggler"/>
+                
                 <div className="hamburger"><div></div></div>
                 <div className="menu">
                     <div>
@@ -29,30 +34,60 @@ export const NavBar = () => {
                                     <Link to="/" replace><strong className="colorText" >Inicio</strong></Link>
                                     <i className="fas fa-step-backward"></i>
                                 </li>
-                                <li onClick={tst}>
-                                    <strong className="colorText" >Admin</strong>
-                                    <i className="fas fa-tools"></i>
-                                </li>
-                                <li onClick={tst}>
-                                    <strong className="colorText" >Bar</strong>
-                                    <i className="fas fa-glass-cheers"></i>
-                                </li>
-                                <li onClick={tst}>
-                                    <strong className="colorText" >Menu</strong>
-                                    <i className="fas fa-bars"></i>
-                                </li>
-                                <li >                                    
-                                    <Link to="/rockola" replace><strong className="colorText" >Rockola</strong></Link>
-                                    <i className="fab fa-spotify"></i>
-                                </li>
+                                {
+                                    (rol === 'propietario') && 
+                                        (
+                                            <li onClick={tst}>
+                                                <strong className="colorText" >Admin</strong>
+                                                <i className="fas fa-tools"></i>
+                                            </li>
+                                        )
+                                    
+                                }
+                                {
+                                    (rol === 'adminBar' || rol === 'propietario') && (
+                                        <li onClick={tst}>
+                                            <strong className="colorText" >Bar</strong>
+                                            <i className="fas fa-glass-cheers"></i>
+                                        </li>
+                                    )
+                                }
+                                {
+                                    (rol === 'usuario' || rol === 'propietario' || rol === 'adminBar') && (
+                                        <>
+                                            <li onClick={tst}>
+                                                <strong className="colorText" >Menu</strong>
+                                                <i className="fas fa-bars"></i>
+                                            </li>
+                                            <li >                                    
+                                                <Link to="/rockola" replace><strong className="colorText" >Rockola</strong></Link>
+                                                <i className="fab fa-spotify"></i>
+                                            </li>
+                                        </>
+                                    )
+                                }
+                                
+                               
                                 <li >                                    
                                     <Link to="/nosotros" replace><strong className="colorText" >Nosotros</strong></Link>
                                     <i className="fas fa-users"></i>
                                 </li>
-                                <li onClick={handleLogOut}>                                    
-                                    <strong className="colorText" >Salir</strong>
-                                    <i className="fas fa-sign-out-alt"></i>
-                                </li>                                
+                                {
+                                    (rol !== 'propietario' && rol !== 'adminBar' && rol !== 'usuario') && (
+                                        <li >                                    
+                                            <Link to="/nosotros" replace><strong className="colorText" >Ingresar</strong></Link>
+                                            <i className="fas fa-users"></i>
+                                        </li>
+                                    )
+                                }                                
+                                {
+                                    (rol === 'propietario' || rol === 'adminBar' || rol === 'usuario')&&(
+                                        <li onClick={handleLogOut}>                                    
+                                            <strong className="colorText" >Salir</strong>
+                                            <i className="fas fa-sign-out-alt"></i>
+                                        </li>                                
+                                    )
+                                }                                
                             </ul>
                         </div>
                     </div>

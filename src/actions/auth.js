@@ -66,12 +66,13 @@ export const startGoogleLogin = () => {
     }
 } 
 
-export const login = (uid, name) => (
+export const login = (uid, name, rol='') => (
     {
         type: tipos.login,
         payload:{
             uid,
-            name
+            name,
+             rol
         }
     }
 )
