@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Menu = () => {
     return (
-        <div>
+        <div style={{'marginTop':'60px'}}>
             Menu
         </div>
     )

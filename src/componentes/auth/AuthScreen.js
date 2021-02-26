@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import validator from 'validator';
 import { startGoogleLogin, startLoginEmailPassword, startRegisterWithEmailPasswordName } from '../../actions/auth';
@@ -8,6 +8,10 @@ import imgRegister from '../../assets/images/register.svg'
 import { useForm } from '../../hooks/useForm';
 
 export const AuthScreen = () => {
+
+    useEffect(() => {
+        console.log('in effect')
+    }, [])
     
     const dispatch = useDispatch();
     const [claseEstilo, setclaseEstilo] = useState('containerAuth')

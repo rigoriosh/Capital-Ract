@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Bar = () => {
     return (
-        <div>
+        <div style={{'marginTop':'60px'}}>
             Bar
         </div>
     )

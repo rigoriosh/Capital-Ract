@@ -8,5 +8,9 @@ export const tipos = {
     uiRemoveError: '[UI] Remove Error',
 
     uiStartLoading: '[UI] Start loading',
-    uiFinishLoading: '[UI] Finish loading'
+    uiFinishLoading: '[UI] Finish loading',
+
+    rolOwner: '[ROL] rol owner',
+    rolAdminBar: '[ROL] rol adminBar',
+    rolUser: '[ROL] rol user',
 }

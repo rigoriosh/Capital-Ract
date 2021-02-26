@@ -1,7 +1,6 @@
 import React from 'react'
 import { Redirect, Switch, Route } from "react-router-dom";
 import { HomeScreen } from '../componentes/home/HomeScreen';
-import { NavBar } from '../componentes/NavBar';
 import { Admin } from '../componentes/admin/Admin';
 import { Bar }      from '../componentes/bar/Bar';
 import { Menu }     from '../componentes/menu/Menu';
@@ -9,7 +8,7 @@ import { Rockola }  from '../componentes/rockola/Rockola';
 import { Nosotros } from '../componentes/nosotros/Nosotros';
 
 
-export const HomeRouter = () => {
+export const HomeRouterXXX = () => {
     return (   
         <div>     
             

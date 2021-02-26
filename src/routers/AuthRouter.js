@@ -4,7 +4,7 @@ import { AuthScreen } from '../componentes/auth/AuthScreen';
 /* import { LoginScreen } from '../componentes/auth/LoginScreen';
 import { RegisterScreen } from '../componentes/auth/RegisterScreen';
  */
-export const AuthRouter = () => {
+export const AuthRouterXXX = () => {
     return (
         <div className="auth__main_xxx">
             <div className="auth__box-container_xxx">
