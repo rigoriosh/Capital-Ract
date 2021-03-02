@@ -52,11 +52,9 @@ export const AppRouter = () => {
  */
     return (
         <Router>
-            <div>
+            <>
             <NavBar rol={rol}/>
                 <Switch>
-                   
-                    
                     <Route exact path="/we" component={Nosotros} />
                     <Route exact path="/auth" component={AuthScreen} />                    
                     <OwnerRouts    rol={rol} path="/owner"    component={RoutsOwner}/>
@@ -67,7 +65,7 @@ export const AppRouter = () => {
                     {/* <PrivateRoute  isAuthenticated={isLogin} path="/auth" component={HomeRouter}/> */}
                     <Redirect to="/"/>
                 </Switch>
-            </div>            
+            </>            
         </Router>
     )
 }

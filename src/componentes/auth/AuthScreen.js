@@ -113,7 +113,7 @@ export const AuthScreen = () => {
                                 <i className="fas fa-lock"></i>
                                 <input type="password" placeholder="password" name="password" className="auth2__input" value={password} onChange={handledInputChange}/>
                             </div>
-                            <button type="submit" className="btn colorBtn" disabled={ui.loading}>Ingresar</button>
+                            <button type="submit" className="btnAuth colorBtn" disabled={ui.loading}>Ingresar</button>
                             <p className="social-text"> O ingresa con alguna de tus cuentas</p>
                             <div className="social-media">
                                 {/* <a href="#" className="social-icon">
@@ -162,7 +162,7 @@ export const AuthScreen = () => {
                                     </>
                                     )
                             }                     
-                            <input type="submit" className="btn colorBtn" value="Registrarse" />
+                            <input type="submit" className="btnAuth colorBtn" value="Registrarse" />
                             <p className="social-text">O registrarse con alguna de tus cuentas</p>
                             <div className="social-media">
                                 {/* <a href="#" className="social-icon">
@@ -189,7 +189,7 @@ export const AuthScreen = () => {
                         <p>
                         Registrate de forma fácil y gratuita a KAPITAL
                         </p>
-                        <button className="btn transparent" id="sign-up-btn" onClick={registrarse}>
+                        <button className="btnAuth transparent" id="sign-up-btn" onClick={registrarse}>
                         registrarse
                         </button>
                     </div>                    
@@ -202,7 +202,7 @@ export const AuthScreen = () => {
                         <p>
                         Ingresa para que puedas realizar tus pedidos.
                         </p>
-                        <button className="btn transparent" id="sign-in-btn" onClick={registrarse}>
+                        <button className="btnAuth transparent" id="sign-in-btn" onClick={registrarse}>
                         Ingresar
                         </button>
                     </div>
