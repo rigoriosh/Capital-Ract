@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ColorPicker, { useColor } from "react-color-palette";
 import { useDispatch, useSelector } from 'react-redux';
+import { addDrink, editDrinks, selectedDrink} from '../../actions/drinksActions';
 import { removeErrorAction, setErrorAction } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm';
 
@@ -10,10 +11,20 @@ import { PaletColor } from '../../utilsComponents/PaletColor';
 
 export const NewDrink = ({history}) => {
     const dispatch = useDispatch();
-    const [archivos, setArchivos] = useState([]);
+    const [archivos, setArchivos] = useState([]);//archivos hacer referencia a la imagen del producto
     const [color, setColor] = useColor("hex", "#3fe22d");
-    const [fields, handledInputChange, resetFields] = useForm(
-        {
+    let initialState = null;    
+    const {ui, drinksReducer} = useSelector(state => state);//ui es para los mensajes de error
+    const {idDrinkSelected, drinks} = drinksReducer;
+    if(idDrinkSelected !== ''){
+        console.log({idDrinkSelected})
+        console.log({drinks})
+        initialState = drinks.find(d => d.idDrink === idDrinkSelected)
+        if(archivos.length === 0 && initialState.imagen !== "") setArchivos([initialState.imagen])
+        if(color.hex === "#3fe22d" && initialState.color !== "") setColor(JSON.parse(initialState.color))
+        console.log(initialState);
+    }else{
+        initialState = {
             idDrink: '',
             nameDrink: '',
             categoryDrink: '',
@@ -21,19 +32,19 @@ export const NewDrink = ({history}) => {
             priceDrink: 0,
             quantityDrink: 0,
         }
-    );
-    const {idDrink, nameDrink, categoryDrink, descriptionDrink, priceDrink, quantityDrink} = fields;
-    const state = useSelector(state => state);
-    const {ui} = state
-    
+    }
+    const [fields, handledInputChange, resetFields] = useForm(initialState);
+    const {idDrink, nameDrink, categoryDrink, descriptionDrink, priceDrink, quantityDrink} = fields;    
 
     const handleForm = (e) =>{
         e.preventDefault();        
         if (isFormValid()) {
             fields['color'] = JSON.stringify(color);
-            fields['archivo'] = archivos[0];
+            fields['imagen'] = archivos[0];
+            if(fields.idDrink === '')fields.idDrink = Math.random();
             console.log(fields);
-            
+            (idDrinkSelected === '') ? dispatch(addDrink(fields)) : dispatch(editDrinks(idDrinkSelected, fields))
+            regresar();
         }
     }
 
@@ -69,10 +80,11 @@ export const NewDrink = ({history}) => {
 
     const regresar = () => {
         history.push('/owner/admin/addDrinks');
+        dispatch(selectedDrink(''));
     }
     
     return (
-        <div style={{'marginTop': '60px'}}>          
+        <div style={{'marginTop': '20px'}}>          
               
             <button onClick={regresar} type="button" className="btn btn-dark btn-small btn-block " style={{"marginTop": "-30px"}} >                
                 <i className="fa fa-arrow-left"></i>    Return                

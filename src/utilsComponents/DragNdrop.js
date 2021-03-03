@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import noimages from '../assets/images/noImages.png';
 
 export const DragNdrop = ({color, archivos, setArchivos}) => {
@@ -8,6 +8,15 @@ export const DragNdrop = ({color, archivos, setArchivos}) => {
         const file = event.dataTransfer.items[0].getAsFile(); 
         logicaImagen(file);
         event.dataTransfer.items.clear();
+    }
+
+    const dragOverHandler = (event) => {
+        event.preventDefault();
+    }
+
+    const previewFile = () => {
+        const file    = document.querySelector('input[type=file]').files[0];
+        logicaImagen(file);                
     }
 
     const logicaImagen = (file) => {
@@ -22,14 +31,9 @@ export const DragNdrop = ({color, archivos, setArchivos}) => {
         }
     }
 
-    const dragOverHandler = (event) => {
-        event.preventDefault();
-    }
-
-    const previewFile = () => {
-        const file    = document.querySelector('input[type=file]').files[0];
-        logicaImagen(file);                
-    }
+    useEffect(() => {
+        console.log(archivos)
+    }, [archivos])
 
     return (
         <>
@@ -47,7 +51,7 @@ export const DragNdrop = ({color, archivos, setArchivos}) => {
                         <img height="200" src={archivos[0]} alt="anything"/>  
                     )
                 }
-                <input type="file" onChange={previewFile} />
+                <input id="myimg" type="file" onChange={previewFile} className=""/>
                 {/* <img src="" height="200" alt=" preview..."></img> */}
             </div>           
         </>

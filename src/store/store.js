@@ -1,13 +1,15 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import { authReducer } from "../reducers/authReducer";
+import { drinksReducer } from "../reducers/drinksReducer";
 import { uiReducer } from "../reducers/uiReducer";
 
 
 const reducers = combineReducers(
     {
         auth: authReducer,
-        ui: uiReducer
+        ui: uiReducer,
+        drinksReducer
     }
 );
 

@@ -1,4 +1,5 @@
 import React, {useEffect, useState } from 'react'
+import {firebase} from '../firebase/firebaseConfig';
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { AuthScreen } from '../componentes/auth/AuthScreen';
 import { HomeScreen } from '../componentes/home/HomeScreen';
@@ -12,20 +13,24 @@ import { RoutsOwner } from './ownerRout/RoutsOwner';
 import UserRouts from './userRout/UserRouts';
 import { RoutsUser } from './userRout/RoutsUser';
 import { tipos } from '../types/tipos';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../actions/auth';
 
 
 
-export const AppRouter = () => {
+export const AppRouter = ({history}) => {
 
-    
+    /* const state = useSelector(state => state);//para acceder a la info del redux
+    const {auth} = state
+    useEffect(() => {
+        (auth.uid) ? setRol(tipos.rolOwner) : setRol('tipos.rolOwner');
+    }, [auth, history]) */
     const [rol, setRol] = useState('');
 
-    useEffect(() => {
-        setRol(tipos.rolOwner);        
-    }, [])
+    
     
 
-/* 
+
     const dispatch = useDispatch();
     const [checkingLogin, setChecking] = useState(false);    
     const [isLogin, setisLogin] = useState(false)
@@ -37,8 +42,10 @@ export const AppRouter = () => {
             if (user?.uid) {
                 dispatch(login(user.uid, user.displayName));                
                 setisLogin(true);
+                setRol(tipos.rolOwner)
             }else{                
                 setisLogin(false);
+                setRol('tipos.rolOwner');
             }
         });
 
@@ -49,7 +56,7 @@ export const AppRouter = () => {
             <h1>Waiting ....</h1>
         )
     }
- */
+
     return (
         <Router>
             <>

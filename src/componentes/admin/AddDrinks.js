@@ -1,28 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteDrink, selectedDrink} from '../../actions/drinksActions';
 
 export const AddDrinks = ({history}) => {
-
-    const [drinks, setDrinks] = useState(
-        [
-            {
-                nombre: 'Aguila',
-                precio: 3500,
-                descripcion: 'Cerveza',
-                cantidad: 50,
-                id: 1
-            },
-            {
-                nombre: 'Poker',
-                precio: 3500,
-                descripcion: 'Cerveza',
-                cantidad: 50,
-                id: 2
-            }
-        ]
-    )
-
-    const deleteDrink = (id) => {
+    const dispatch = useDispatch()
+    const {drinksReducer} = useSelector(state => state);
+    const drinks = drinksReducer.drinks
+    console.log(drinks);
+    
+    
+    const eliminarDrink = (id) => {
         console.log({id});
+        dispatch(deleteDrink(id));
+        history.push('/owner/admin/addDrinks');//para actualizar la tabla
+    }
+    const editDrink = (id) => {     
+        console.log({id});   
+        dispatch(selectedDrink(id));
+        newDrink();
     }
     const regresar = () => {
         history.push('/owner/admin');
@@ -30,6 +25,10 @@ export const AddDrinks = ({history}) => {
     const newDrink = () => {
         history.push('/owner/admin/NewDrink');
     }
+
+    useEffect(() => {
+        console.log(drinksReducer);
+    }, [drinksReducer])
     return (
         <>
             
@@ -56,15 +55,15 @@ export const AddDrinks = ({history}) => {
                 <tbody>
                     {
                         drinks.map(e => (
-                            <tr key={e.id} className="table-active" >                            
-                                <th scope="row">{e.nombre}</th>
-                                <td>{e.precio}</td>                    
-                                <td>{e.cantidad}</td>
+                            <tr key={e.idDrink} className="table-active" >                            
+                                <th scope="row">{e.nameDrink}</th>
+                                <td>{e.priceDrink}</td>                    
+                                <td>{e.quantityDrink}</td>
                                 <td>
-                                <button className="btn btn-info mr-1 btn-sm" >
+                                <button className="btn btn-info mr-1 btn-sm" onClick={() => {editDrink(e.idDrink)}}>
                                     <i className="fa fa-pen"></i>                
                                 </button>
-                                <button className="btn btn-danger btn-sm" onClick={() => {deleteDrink(e.id)}}>
+                                <button className="btn btn-danger btn-sm" onClick={() => {eliminarDrink(e.idDrink)}}>
                                     <i className="fa fa-trash"></i>                
                                 </button>
                                 </td>

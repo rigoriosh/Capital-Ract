@@ -10,7 +10,13 @@ export const tipos = {
     uiStartLoading: '[UI] Start loading',
     uiFinishLoading: '[UI] Finish loading',
 
-    rolOwner: '[ROL] rol owner',
-    rolAdminBar: '[ROL] rol adminBar',
-    rolUser: '[ROL] rol user',
+    rolOwner: 'ROL_owner', // tIe4RvRkZbVx25Dw
+    rolAdminBar: 'ROL_adminBar',
+    rolUser: 'ROL_user',
+
+    editDrink: '[Drink] edit drink',
+    addDrink: '[Drink] add drink',
+    selectedDrink: '[Drink] selected drink',
+    deleteDrink: '[Drink] delete drink',
 }
+

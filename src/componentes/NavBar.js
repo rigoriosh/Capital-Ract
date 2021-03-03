@@ -11,9 +11,10 @@ export const NavBar = ({rol}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const handleLogOut = () => {
-        dispatch(startLogOut())
-        history.replace('/auth');
+    const handleLogOut = async() => {
+        await dispatch(startLogOut())        
+        history.replace('/');
+        closeMenu()
     }
 
     const closeMenu = () => {
@@ -102,8 +103,8 @@ export const NavBar = ({rol}) => {
                                 }                                
                                 {
                                     (rol === tipos.rolOwner || rol === tipos.rolAdminBar || rol === tipos.rolUser)&&(
-                                        <li onClick={handleLogOut}>                                    
-                                            <strong className="colorText" >Salir</strong>
+                                        <li>     
+                                            <Link onClick={handleLogOut} to="/" replace><strong className="colorText" >Salir</strong></Link>                                                                           
                                             <i className="fas fa-sign-out-alt"></i>
                                         </li>                                
                                     )
@@ -119,24 +120,3 @@ export const NavBar = ({rol}) => {
         
     )
 }
-
-
-/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-
-            <div className="row"  id="navbarSupportedContent">
-                <button type="button" className="btn " >Menu</button>
-                <button type="button" className="btn btn-dark " onClick={handleLogOut}>Salir</button>
-                <button type="button" className="btn btn-dark">Dark</button>
-            </div>
-        </nav> */
-
-/* 
-<div className="row NavBar">
-                <div className="col colorBtn pointer" onClick={tst}>Menu</div>
-                <div className="col pointer" onClick={tst}>Admin</div>
-                <div className="col pointer" onClick={tst}>Administrador</div>
-                <div className="col pointer" onClick={tst}>Menu</div>
-                <div className="col pointer" onClick={tst}>Rockola</div>
-                <div className="col pointer" onClick={tst}>Salir</div>
-            </div>
-*/

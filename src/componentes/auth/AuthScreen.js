@@ -7,20 +7,23 @@ import logo from '../../assets/images/log.svg';
 import imgRegister from '../../assets/images/register.svg'
 import { useForm } from '../../hooks/useForm';
 
-export const AuthScreen = () => {
+export const AuthScreen = ({history}) => {
 
-    useEffect(() => {
-        console.log('in effect')
-    }, [])
+    
     
     const dispatch = useDispatch();
     const [claseEstilo, setclaseEstilo] = useState('containerAuth')
     const [register, setRegister] = useState(false);
 
     const state = useSelector(state => state);
-    const {ui} = state
+    console.log({state})
+    const {ui, auth} = state
 
     //// login
+    useEffect(() => {
+        console.log('in effect')
+        if(auth.uid) history.push('/');//si ya esta registrado lo redirecciona a home
+    }, [auth, history])
 
     const [fieldsLogin, handledInputChange] = useForm(
         {
@@ -44,7 +47,7 @@ export const AuthScreen = () => {
         dispatch(startGoogleLogin());
     }
 
-    const handleLogin = (e) =>{
+    const handleLogin = async(e) =>{
         e.preventDefault();
         console.log(email, password);
         if (isFormValid()) {
