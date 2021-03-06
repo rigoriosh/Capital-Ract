@@ -18,5 +18,10 @@ export const tipos = {
     addDrink: '[Drink] add drink',
     selectedDrink: '[Drink] selected drink',
     deleteDrink: '[Drink] delete drink',
+
+    editFood: '[Food] edit food',
+    addFood: '[Food] add food',
+    selectedFood: '[Food] selected food',
+    deleteFood: '[Food] delete food',
 }
 

@@ -1,35 +1,35 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteDrink, selectedDrink} from '../../actions/drinksActions';
+import { deleteFood, selectedFood} from '../../actions/foodsActions';
 
-export const AddDrinks = ({history}) => {
+export const AddFoods = ({history}) => {
     const dispatch = useDispatch()
-    const {drinksReducer} = useSelector(state => state);
-    let drinks = []
-    if(drinksReducer.drinks !== undefined) drinks = drinksReducer.drinks
-    console.log(drinks);
+    const {foodsReducer} = useSelector(state => state);
+    let foods = []
+    if(foodsReducer.foods !== undefined) foods = foodsReducer.foods
+    console.log(foods);
     
     
-    const eliminarDrink = (id) => {
+    const eliminarFood = (id) => {
         console.log({id});
-        dispatch(deleteDrink(id));
-        history.push('/owner/admin/addDrinks');//para actualizar la tabla
+        dispatch(deleteFood(id));
+        history.push('/owner/admin/addFoods');//para actualizar la tabla
     }
-    const editDrink = (id) => {     
+    const editFood = (id) => {     
         console.log({id});   
-        dispatch(selectedDrink(id));
-        newDrink();
+        dispatch(selectedFood(id));
+        newFood();
     }
     const regresar = () => {
         history.push('/owner/admin');
     }
-    const newDrink = () => {
-        history.push('/owner/admin/NewDrink');
+    const newFood = () => {
+        history.push('/owner/admin/NewFood');
     }
 
     useEffect(() => {
-        console.log(drinksReducer);
-    }, [drinksReducer])
+        console.log(foodsReducer);
+    }, [foodsReducer])
     return (
         <>
             
@@ -37,11 +37,11 @@ export const AddDrinks = ({history}) => {
                 <i className="fa fa-arrow-left"></i> Return            
             </button>
             <hr/>
-            <h1>Drinks's List</h1>
+            <h1>Foods's List</h1>
             <hr/>
             <div className="row">
                 <div className="col text-right">
-                    <button className="btn btn-primary" onClick={newDrink}><i className="fa fa-plus"></i></button>            
+                    <button className="btn btn-primary" onClick={newFood}><i className="fa fa-plus"></i></button>            
                 </div>
             </div>
             <table className="table table-sm table-striped table-dark mt-3 animate__headShake" >
@@ -55,16 +55,16 @@ export const AddDrinks = ({history}) => {
                 </thead>
                 <tbody>
                     {
-                        drinks.map(e => (
-                            <tr key={e.idDrink} className="table-active" >                            
-                                <th scope="row">{e.nameDrink}</th>
-                                <td>{e.priceDrink}</td>                    
-                                <td>{e.quantityDrink}</td>
+                        foods.map(e => (
+                            <tr key={e.idFood} className="table-active" >                            
+                                <th scope="row">{e.nameFood}</th>
+                                <td>{e.priceFood}</td>                    
+                                <td>{e.quantityFood}</td>
                                 <td>
-                                <button className="btn btn-info mr-1 btn-sm" onClick={() => {editDrink(e.idDrink)}}>
+                                <button className="btn btn-info mr-1 btn-sm" onClick={() => {editFood(e.idFood)}}>
                                     <i className="fa fa-pen"></i>                
                                 </button>
-                                <button className="btn btn-danger btn-sm" onClick={() => {eliminarDrink(e.idDrink)}}>
+                                <button className="btn btn-danger btn-sm" onClick={() => {eliminarFood(e.idFood)}}>
                                     <i className="fa fa-trash"></i>                
                                 </button>
                                 </td>

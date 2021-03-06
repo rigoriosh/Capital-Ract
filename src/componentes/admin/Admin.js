@@ -6,7 +6,11 @@ export const Admin = ({history}) => {
         history.push('/owner/admin/addDrinks');
     }
     const addFoods = () => {
+        history.push('/owner/admin/addFoods');
+    }
 
+    const addRoles = () => {
+        console.log('roles')
     }
 
     return (
@@ -14,9 +18,8 @@ export const Admin = ({history}) => {
             <h1 style={{"marginLeft": "55px"}}>admin CAPITAL</h1>
 
             <button type="button" className="btn btn-dark" onClick={addDrinks}>Add Drinks</button>
-            <button type="button" className="btn btn-primary" onClick={addFoods}>
-                Add Foods
-            </button>
+            <button type="button" className="btn btn-primary" onClick={addFoods}>Add Foods</button>
+            <button type="button" className="btn btn-success" onClick={addRoles}>Roles</button>
         </div>
     )
 }

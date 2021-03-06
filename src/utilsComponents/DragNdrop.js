@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import noimages from '../assets/images/noImages.png';
 
 export const DragNdrop = ({color, archivos, setArchivos}) => {
@@ -30,10 +30,6 @@ export const DragNdrop = ({color, archivos, setArchivos}) => {
             setArchivos([]);
         }
     }
-
-    useEffect(() => {
-        console.log(archivos)
-    }, [archivos])
 
     return (
         <>

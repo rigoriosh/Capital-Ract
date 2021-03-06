@@ -13,7 +13,7 @@ import { RoutsOwner } from './ownerRout/RoutsOwner';
 import UserRouts from './userRout/UserRouts';
 import { RoutsUser } from './userRout/RoutsUser';
 import { tipos } from '../types/tipos';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { login } from '../actions/auth';
 
 
@@ -37,7 +37,7 @@ export const AppRouter = ({history}) => {
 
     useEffect(() => {        
         firebase.auth().onAuthStateChanged((user) => {
-            console.log(user);
+            console.log(user, {isLogin});
             setChecking(true);
             if (user?.uid) {
                 dispatch(login(user.uid, user.displayName));                
@@ -49,7 +49,7 @@ export const AppRouter = ({history}) => {
             }
         });
 
-    }, [dispatch, setChecking])
+    }, [dispatch, isLogin, setChecking])
 
     if (!checkingLogin) {
         return (
