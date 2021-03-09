@@ -1,6 +1,6 @@
 import { tipos } from "../types/tipos";
 
-const initialState = {foods:[], idFoodSelected: '',
+const initialState = {foods:[], idSelected: '',
     categorias: [
         {
             idCategoria: Math.random(),
@@ -51,16 +51,16 @@ export const foodsReducer = (state = initialState, action) => {
             state.foods.push(action.payload);
             return state;
         case tipos.editFood:
-            state.idFoodSelected = '';
-            i = state.foods.findIndex(e => e.idFood === action.payload.idFood)
+            state.idSelected = '';
+            i = state.foods.findIndex(e => e.id === action.payload.id)
             console.log(i)
             state.foods[i] = action.payload.food;
             return state;
         case tipos.selectedFood:
-            state.idFoodSelected = action.payload;
+            state.idSelected = action.payload;
             return state;
         case tipos.deleteFood:            
-            i = state.foods.findIndex(e => e.idFood === action.payload.idFood)
+            i = state.foods.findIndex(e => e.id === action.payload.id)
             console.log(i)
             if (i > -1) {
                 state.foods.splice(i, 1);

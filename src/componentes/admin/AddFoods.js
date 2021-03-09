@@ -56,15 +56,15 @@ export const AddFoods = ({history}) => {
                 <tbody>
                     {
                         foods.map(e => (
-                            <tr key={e.idFood} className="table-active" >                            
-                                <th scope="row">{e.nameFood}</th>
-                                <td>{e.priceFood}</td>                    
-                                <td>{e.quantityFood}</td>
+                            <tr key={e.id} className="table-active" >                            
+                                <th scope="row">{e.name}</th>
+                                <td>{e.price}</td>                    
+                                <td>{e.quantity}</td>
                                 <td>
-                                <button className="btn btn-info mr-1 btn-sm" onClick={() => {editFood(e.idFood)}}>
+                                <button className="btn btn-info mr-1 btn-sm" onClick={() => {editFood(e.id)}}>
                                     <i className="fa fa-pen"></i>                
                                 </button>
-                                <button className="btn btn-danger btn-sm" onClick={() => {eliminarFood(e.idFood)}}>
+                                <button className="btn btn-danger btn-sm" onClick={() => {eliminarFood(e.id)}}>
                                     <i className="fa fa-trash"></i>                
                                 </button>
                                 </td>
@@ -74,6 +74,16 @@ export const AddFoods = ({history}) => {
                           
                 </tbody>
             </table>
+            {
+                (foods.length === 0) && (
+                    <div className="aler alert-warning text-center mt-3 animate__bounce">
+                        <h4 className="alert-heading">Whitout Products in your stock</h4>
+                        <p>
+                            <i className="fa fa-exclamation fa-2x"></i>
+                        </p>        
+                    </div>
+                )
+            }
 
 
 

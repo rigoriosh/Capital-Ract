@@ -16,7 +16,7 @@ export const useForm = (initialState) => {
 
     <form onSubmit={handleLogin}
 
-    <input type="text" className="form-control" placeholder="Drink name" required name="nameDrink" value={nameDrink}/>
+    <input type="text" className="form-control" placeholder="Drink name" required name="name" value={name}/>
      */
     
     const [fields, setfields] = useState(initialState)

@@ -6,15 +6,11 @@ export const HomeScreen = () => {
         <div className="homeScreem col">
             HomeScreen
 
-            <h3 style={{'color': 'white'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis illo voluptatem voluptas nobis error nam consequatur quisquam ab optio vitae ratione impedit suscipit, praesentium a molestiae rem quidem recusandae maxime!</h3>
-            <h3 style={{'color': 'white'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis illo voluptatem voluptas nobis error nam consequatur quisquam ab optio vitae ratione impedit suscipit, praesentium a molestiae rem quidem recusandae maxime!</h3>
-            <h3 style={{'color': 'white'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis illo voluptatem voluptas nobis error nam consequatur quisquam ab optio vitae ratione impedit suscipit, praesentium a molestiae rem quidem recusandae maxime!</h3>
-            <h3 style={{'color': 'white'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis illo voluptatem voluptas nobis error nam consequatur quisquam ab optio vitae ratione impedit suscipit, praesentium a molestiae rem quidem recusandae maxime!</h3>
-            <h3 style={{'color': 'white'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis illo voluptatem voluptas nobis error nam consequatur quisquam ab optio vitae ratione impedit suscipit, praesentium a molestiae rem quidem recusandae maxime!</h3>
-            <h3 style={{'color': 'white'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis illo voluptatem voluptas nobis error nam consequatur quisquam ab optio vitae ratione impedit suscipit, praesentium a molestiae rem quidem recusandae maxime!</h3>
-            <h3 style={{'color': 'white'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis illo voluptatem voluptas nobis error nam consequatur quisquam ab optio vitae ratione impedit suscipit, praesentium a molestiae rem quidem recusandae maxime!</h3>
-            <h3 style={{'color': 'white'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis illo voluptatem voluptas nobis error nam consequatur quisquam ab optio vitae ratione impedit suscipit, praesentium a molestiae rem quidem recusandae maxime!</h3>
+            <h3 style={{'color': 'white', 'marginTop': '50px'}}>Quede en menu drinks, ajustar la cantidad de pedidos por 
+            producto</h3>
+            
         </div>
         </div>
     )
 }
+  

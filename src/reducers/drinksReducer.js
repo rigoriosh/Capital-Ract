@@ -5,22 +5,22 @@ const initialState =
     drinks: [
         /* {
             idDrink: 1,
-            nameDrink: 'Aguila',
-            priceDrink: 3500,
-            descriptionDrink: '350mm',
+            name: 'Aguila',
+            price: 3500,
+            description: '350mm',
             categoryDrink: 'Cerveza',
-            quantityDrink: 50,                
+            quantity: 50,                
             color:'',
             imagen: ''
         },
         {
             idDrink: 2,
-            nameDrink: 'Poker',
-            priceDrink: 3500,
-            descriptionDrink: '350mm',
+            name: 'Poker',
+            price: 3500,
+            description: '350mm',
             idCategoria: Number,
             idTipoCateg: Number,
-            quantityDrink: 50,                
+            quantity: 50,                
             color:'',
             imagen: ''
         } */

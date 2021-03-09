@@ -1,7 +1,16 @@
 import React from 'react'
-import noimages from '../assets/images/noImages.png';
+import { CardProducto } from '../componentes/menu/CardProducto';
 
-export const DragNdrop = ({color, archivos, setArchivos}) => {
+export const DragNdrop = ({color, archivos, setArchivos, fields}) => {
+    console.log(fields)
+    const producto = {
+        imagen: archivos, 
+        color: JSON.stringify({hex: color.hex}),
+        name: fields.name,
+        description: fields.description,
+        price: fields.price,
+        cantidadPedido: 'cantidadPedido'
+    }
 
     const dropHandler = (event) => {
         event.preventDefault();        
@@ -22,33 +31,23 @@ export const DragNdrop = ({color, archivos, setArchivos}) => {
     const logicaImagen = (file) => {
         const reader  = new FileReader();
         reader.onloadend = function () {           
-            setArchivos([reader.result]);
+            setArchivos(reader.result);
           }
         if (file) {
             reader.readAsDataURL(file);
         } else {
-            setArchivos([]);
+            setArchivos('');
         }
     }
 
     return (
         <>
-            <div id="drop_zone" className="well drop-zone file-over" style={{"backgroundColor": color.hex}}
+            <div id="drop_zone" className="well drop-zone file-over"
                 onDrop={dropHandler}
                 onDragOver={dragOverHandler}>
-                <p>Drag and drop image</p>
-                {
-                    (archivos.length === 0) 
-                    ? (
-                        <img src={noimages} alt="No " />
-                    )
-                    :
-                    (archivos.length !== 0) && (
-                        <img height="200" src={archivos[0]} alt="anything"/>  
-                    )
-                }
+                <p>Drag and drop image</p>                
+                <CardProducto  producto={producto} />
                 <input id="myimg" type="file" onChange={previewFile} className=""/>
-                {/* <img src="" height="200" alt=" preview..."></img> */}
             </div>           
         </>
     )

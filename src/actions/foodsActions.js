@@ -1,21 +1,21 @@
 import { tipos } from "../types/tipos"
 
-export const editFood = (idFood, food) => (
+export const editFood = (id, food) => (
     {
         type: tipos.editFood,
-        payload: {idFood, food}
+        payload: {id, food}
     }
 );
-export const selectedFood = (idFood) => (
+export const selectedFood = (id) => (
     {
         type: tipos.selectedFood,
-        payload: idFood
+        payload: id
     }
 );
-export const deleteFood = (idFood) => (
+export const deleteFood = (id) => (
     {
         type: tipos.deleteFood,
-        payload: {idFood}
+        payload: {id}
     }
 );
 export const addFood = (food) => (

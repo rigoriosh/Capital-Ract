@@ -15,16 +15,16 @@ export const NewFood = ({history}) => {
     const [archivos, setArchivos] = useState([]);//archivos hacer referencia a la imagen del producto
     const [idCategoria, setCategoria] = useState('select...');
     const [foodKinds, setFoodsKinds] = useState([]);
-    const [idFoodKind, setIdFoodKind] = useState('select...');
+    const [idKind, setidKind] = useState('select...');
     const [color, setColor] = useColor("hex", defaultColor);
     let initialState = null;    
     const {ui, foodsReducer} = useSelector(state => state);//ui es para los mensajes de error    
-    const {idFoodSelected, foods, categorias} = foodsReducer;
+    const {idSelected, foods, categorias} = foodsReducer;
     console.log(foodsReducer)
-    if(idFoodSelected !== '' && idFoodSelected !== undefined){
-        console.log({idFoodSelected})
+    if(idSelected !== '' && idSelected !== undefined){
+        console.log({idSelected})
         console.log({foods})
-        initialState = foods.find(d => d.idFood === idFoodSelected)
+        initialState = foods.find(d => d.id === idSelected)
         if(archivos.length === 0 && initialState.imagen !== ""){            
             setArchivos([initialState.imagen])
         } 
@@ -34,40 +34,40 @@ export const NewFood = ({history}) => {
         if (idCategoria === 'select...') {
             setCategoria(initialState.idCategoria)
         }
-        if (idFoodKind === 'select...') {
-            setIdFoodKind(initialState.idFoodKind)
+        if (idKind === 'select...') {
+            setidKind(initialState.idKind)
         }
         console.log(initialState);
     }else{
         initialState = {
-            idFood: '',
-            nameFood: '',
-            descriptionFood: '',
-            priceFood: 0,
-            quantityFood: 0,
+            id: '',
+            name: '',
+            description: '',
+            price: 0,
+            quantity: 0,
         }
     }
     const [fields, handledInputChange] = useForm(initialState);
-    const {idFood, nameFood, descriptionFood, priceFood, quantityFood} = fields;    
+    const {id, name, description, price, quantity} = fields;    
 
     const handleForm = (e) =>{
         e.preventDefault();        
         console.log("objec2t");
         if (isFormValid()) {
             fields['color'] = JSON.stringify(color);
-            fields['imagen'] = archivos[0];       
+            fields['imagen'] = archivos;       
             fields['idCategoria'] = idCategoria;
-            fields['idFoodKind'] = idFoodKind;
-            if(fields.idFood === '')fields.idFood = Math.random();
+            fields['idKind'] = idKind;
+            if(fields.id === '')fields.id = Math.random();
             console.log(fields);
-            (idFoodSelected === '' || idFoodSelected === undefined) ? dispatch(addFood(fields)) : dispatch(editFood(idFoodSelected, fields))
+            (idSelected === '' || idSelected === undefined) ? dispatch(addFood(fields)) : dispatch(editFood(idSelected, fields))
             regresar();
         }
     }
 
     const isFormValid = () => {
         
-        if (nameFood === '') {            
+        if (name === '') {            
             dispatch(setErrorAction('El nombre de la bebida es requerido'));
             return false;
         }
@@ -75,19 +75,19 @@ export const NewFood = ({history}) => {
             dispatch(setErrorAction('La categoría de la bebida es requerido'));
             return false;
         }
-        if (idFoodKind === 'select...'){
+        if (idKind === 'select...'){
             dispatch(setErrorAction('El tipo de la bebida es requerido'));
             return false;
         }
-        if (descriptionFood === ''){
+        if (description === ''){
             dispatch(setErrorAction('La descripción de la bebida es requerido'));
             return false;
         }
-        if (priceFood < 1){
+        if (price < 1){
             dispatch(setErrorAction('El precio de la bebida es requerido'));
             return false;
         }
-        if (quantityFood < 1){
+        if (quantity < 1){
             dispatch(setErrorAction('La cantidad de bebidas es requerida'));
             return false;
         }
@@ -131,12 +131,12 @@ export const NewFood = ({history}) => {
                     <div className="form-group">
                         <label style={{"marginTop": "45px"}}>ID by Firebase</label>
                         <input type="text" className="form-control" placeholder="Firebase ID" disabled
-                            name="idFood" value={idFood}/>
+                            name="id" value={id}/>
                         <small className="form-text ">this field is auto generated</small>
                     </div>
                     <div className="form-group">
                         <label >Name</label>
-                        <input type="text" className="form-control" placeholder="Food name" required name="nameFood" value={nameFood} onChange={handledInputChange}/>
+                        <input type="text" className="form-control" placeholder="Food name" required name="name" value={name} onChange={handledInputChange}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="selectCategory">Category</label>
@@ -152,7 +152,7 @@ export const NewFood = ({history}) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="selectFoodTip">Food kind</label>
-                        <select id="selectFoodTip" onChange={s => setIdFoodKind(s.target.value)} value={idFoodKind} className="form-control">
+                        <select id="selectFoodTip" onChange={s => setidKind(s.target.value)} value={idKind} className="form-control">
                             <option value="select...">Select</option>
                             {
                                 foodKinds.map(({idTipoCateg, nameTipo}) => {
@@ -163,18 +163,18 @@ export const NewFood = ({history}) => {
                     </div>
                     <div className="form-group">
                         <label >Description</label>
-                        <input type="text" className="form-control" placeholder="Food Description" required name="descriptionFood" value={descriptionFood} onChange={handledInputChange}/>
+                        <input type="text" className="form-control" placeholder="Food Description" required name="description" value={description} onChange={handledInputChange}/>
                     </div>
                     <div className="form-group">
                         <label >Price</label>
-                        <input type="number" className="form-control" placeholder="Food Price" required name="priceFood" value={priceFood}  onChange={handledInputChange}/>
+                        <input type="number" className="form-control" placeholder="Food Price" required name="price" value={price}  onChange={handledInputChange}/>
                     </div>
                     <div className="form-group">
                         <label >Quantity</label>
-                        <input type="number" className="form-control" placeholder="Food Quantity" required name="quantityFood" value={quantityFood} onChange={handledInputChange}/>
+                        <input type="number" className="form-control" placeholder="Food Quantity" required name="quantity" value={quantity} onChange={handledInputChange}/>
                     </div>
                     <div className="col-md-4" style={{"padding": "0px"}}>                                                      
-                        <DragNdrop color={color} archivos={archivos} setArchivos={setArchivos}/>
+                        <DragNdrop color={color} archivos={archivos} setArchivos={setArchivos} fields={fields}/>
                         <PaletColor ColorPicker={ColorPicker} setColor={setColor} color={color}/>
                         
                     </div>

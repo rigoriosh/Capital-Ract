@@ -12,21 +12,21 @@ import { PaletColor } from '../../utilsComponents/PaletColor';
 export const NewDrink = ({history}) => {
     const dispatch = useDispatch();
     const defaultColor = "#823f3f"
-    const [archivos, setArchivos] = useState([]);//archivos hacer referencia a la imagen del producto
+    const [archivos, setArchivos] = useState('');//archivos hacer referencia a la imagen del producto
     const [idCategoria, setCategoria] = useState('select...');
     const [drinkKinds, setDrinksKinds] = useState([]);
-    const [idDrinkKind, setIdDrinkKind] = useState('select...');
+    const [idKind, setidKind] = useState('select...');
     const [color, setColor] = useColor("hex", defaultColor);
     let initialState = null;    
     const {ui, drinksReducer} = useSelector(state => state);//ui es para los mensajes de error    
-    const {idDrinkSelected, drinks, categorias} = drinksReducer;
+    const {idSelected, drinks, categorias} = drinksReducer;
     console.log(drinksReducer)
-    if(idDrinkSelected !== '' && idDrinkSelected !== undefined){
-        console.log({idDrinkSelected})
+    if(idSelected !== '' && idSelected !== undefined){
+        console.log({idSelected})
         console.log({drinks})
-        initialState = drinks.find(d => d.idDrink === idDrinkSelected)
+        initialState = drinks.find(d => d.id === idSelected)
         if(archivos.length === 0 && initialState.imagen !== ""){            
-            setArchivos([initialState.imagen])
+            setArchivos(initialState.imagen)
         } 
         if(color.hex === defaultColor && initialState.color !== ""){
             setColor(JSON.parse(initialState.color))
@@ -34,40 +34,40 @@ export const NewDrink = ({history}) => {
         if (idCategoria === 'select...') {
             setCategoria(initialState.idCategoria)
         }
-        if (idDrinkKind === 'select...') {
-            setIdDrinkKind(initialState.idDrinkKind)
+        if (idKind === 'select...') {
+            setidKind(initialState.idKind)
         }
         console.log(initialState);
     }else{
         initialState = {
-            idDrink: '',
-            nameDrink: '',
-            descriptionDrink: '',
-            priceDrink: 0,
-            quantityDrink: 0,
+            id: '',
+            name: '',
+            description: '',
+            price: 0,
+            quantity: 0
         }
     }
     const [fields, handledInputChange] = useForm(initialState);
-    const {idDrink, nameDrink, descriptionDrink, priceDrink, quantityDrink} = fields;    
+    const {id, name, description, price, quantity} = fields;    
 
     const handleForm = (e) =>{
         e.preventDefault();        
         console.log("objec2t");
         if (isFormValid()) {
             fields['color'] = JSON.stringify(color);
-            fields['imagen'] = archivos[0];       
+            fields['imagen'] = archivos;       
             fields['idCategoria'] = idCategoria;
-            fields['idDrinkKind'] = idDrinkKind;
-            if(fields.idDrink === '')fields.idDrink = Math.random();
+            fields['idKind'] = idKind;
+            if(fields.id === '')fields.id = Math.random();
             console.log(fields);
-            (idDrinkSelected === '' || idDrinkSelected === undefined) ? dispatch(addDrink(fields)) : dispatch(editDrinks(idDrinkSelected, fields))
+            (idSelected === '' || idSelected === undefined) ? dispatch(addDrink(fields)) : dispatch(editDrinks(idSelected, fields))
             regresar();
         }
     }
 
     const isFormValid = () => {
         
-        if (nameDrink === '') {            
+        if (name === '') {            
             dispatch(setErrorAction('El nombre de la bebida es requerido'));
             return false;
         }
@@ -75,19 +75,19 @@ export const NewDrink = ({history}) => {
             dispatch(setErrorAction('La categoría de la bebida es requerido'));
             return false;
         }
-        if (idDrinkKind === 'select...'){
+        if (idKind === 'select...'){
             dispatch(setErrorAction('El tipo de la bebida es requerido'));
             return false;
         }
-        if (descriptionDrink === ''){
+        if (description === ''){
             dispatch(setErrorAction('La descripción de la bebida es requerido'));
             return false;
         }
-        if (priceDrink < 1){
+        if (price < 1){
             dispatch(setErrorAction('El precio de la bebida es requerido'));
             return false;
         }
-        if (quantityDrink < 1){
+        if (quantity < 1){
             dispatch(setErrorAction('La cantidad de bebidas es requerida'));
             return false;
         }
@@ -131,12 +131,12 @@ export const NewDrink = ({history}) => {
                     <div className="form-group">
                         <label style={{"marginTop": "45px"}}>ID by Firebase</label>
                         <input type="text" className="form-control" placeholder="Firebase ID" disabled
-                            name="idDrink" value={idDrink}/>
+                            name="id" value={id}/>
                         <small className="form-text ">this field is auto generated</small>
                     </div>
                     <div className="form-group">
                         <label >Name</label>
-                        <input type="text" className="form-control" placeholder="Drink name" required name="nameDrink" value={nameDrink} onChange={handledInputChange}/>
+                        <input type="text" className="form-control" placeholder="Drink name" required name="name" value={name} onChange={handledInputChange}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="selectCategory">Category</label>
@@ -152,7 +152,7 @@ export const NewDrink = ({history}) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="selectDrinkTip">Drink kind</label>
-                        <select id="selectDrinkTip" onChange={s => setIdDrinkKind(s.target.value)} value={idDrinkKind} className="form-control">
+                        <select id="selectDrinkTip" onChange={s => setidKind(s.target.value)} value={idKind} className="form-control">
                             <option value="select...">Select</option>
                             {
                                 drinkKinds.map(({idTipoCateg, nameTipo}) => {
@@ -163,18 +163,18 @@ export const NewDrink = ({history}) => {
                     </div>
                     <div className="form-group">
                         <label >Description</label>
-                        <input type="text" className="form-control" placeholder="Drink Description" required name="descriptionDrink" value={descriptionDrink} onChange={handledInputChange}/>
+                        <input type="text" className="form-control" placeholder="Drink Description" required name="description" value={description} onChange={handledInputChange}/>
                     </div>
                     <div className="form-group">
                         <label >Price</label>
-                        <input type="number" className="form-control" placeholder="Drink Price" required name="priceDrink" value={priceDrink}  onChange={handledInputChange}/>
+                        <input type="number" className="form-control" placeholder="Drink Price" required name="price" value={price}  onChange={handledInputChange}/>
                     </div>
                     <div className="form-group">
                         <label >Quantity</label>
-                        <input type="number" className="form-control" placeholder="Drink Quantity" required name="quantityDrink" value={quantityDrink} onChange={handledInputChange}/>
+                        <input type="number" className="form-control" placeholder="Drink Quantity" required name="quantity" value={quantity} onChange={handledInputChange}/>
                     </div>
                     <div className="col-md-4" style={{"padding": "0px"}}>                                                      
-                        <DragNdrop color={color} archivos={archivos} setArchivos={setArchivos}/>
+                        <DragNdrop color={color} archivos={archivos} setArchivos={setArchivos} fields={fields}/>
                         <PaletColor ColorPicker={ColorPicker} setColor={setColor} color={color}/>
                         
                     </div>
