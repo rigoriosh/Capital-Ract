@@ -5,7 +5,7 @@ import { deleteDrink, selectedDrink} from '../../actions/drinksActions';
 export const AddDrinks = ({history}) => {
     const dispatch = useDispatch()
     const {drinksReducer} = useSelector(state => state);
-    let drinks = []
+    let drinks = [];
     if(drinksReducer.drinks !== undefined) drinks = drinksReducer.drinks
     console.log(drinks);
     

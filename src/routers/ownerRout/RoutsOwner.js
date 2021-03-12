@@ -7,7 +7,7 @@ import { NewDrink } from '../../componentes/admin/NewDrink';
 import { NewFood } from '../../componentes/admin/NewFood';
 import { Bar } from '../../componentes/bar/Bar';
 import { Menu } from '../../componentes/menu/Menu';
-import { MenuDrinks } from '../../componentes/menu/MenuDrinks';
+import { MenuDrinks } from '../../componentes/menu/menuDrinks';
 import { MenuFoods } from '../../componentes/menu/MenuFoods';
 import { Rockola } from '../../componentes/rockola/Rockola';
 

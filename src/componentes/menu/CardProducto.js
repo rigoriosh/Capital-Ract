@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import noimages from '.././/../assets/images/noImages.png';
 
-export const CardProducto = ({producto}) => {    
-    useEffect(() => {
-        console.log(producto);
-    }, [producto])
-    const [cantidadPedido, setCantidadPedido] = useState(0);
-    const setPedido = (action) => {
+export const CardProducto = ({producto, menuContext, addPedido}) => {
+    const [cantidadPedido, setCantidadPedido] = useState(0);  
+    const {pedido, setPedido} = menuContext;
+    console.log({pedido});
+    console.log({producto})
+    
+    
+    const fixPedido = (action) => {
+        let cuantasPidieron = 0;
         if(action === 'sumar'){
-            setCantidadPedido(cantidadPedido + 1);
-            console.log(producto)
+            cuantasPidieron = cantidadPedido + 1;
         }else{
-
+            cuantasPidieron = cantidadPedido - 1;            
         }
+        setCantidadPedido(cuantasPidieron);
+        addPedido(producto, cuantasPidieron);
     }
     return (
         <div className="card cardProducto text-center" style={{'backgroundColor': JSON.parse(producto.color).hex}}>
@@ -31,10 +35,10 @@ export const CardProducto = ({producto}) => {
                     {
                         (cantidadPedido > 0) && (<p>Cantidad: {cantidadPedido}</p>)
                     }                    
-                    <button onClick={() => setPedido('sumar')} type="button" className="btn btn-success rounded-circle" style={{"marginRight": "5px"}}><i className="fas fa-plus" style={{"padding": "0px 0px 0px 0px"}}></i></button>
+                    <button onClick={() => fixPedido('sumar')} type="button" className="btn btn-success rounded-circle" style={{"marginRight": "5px"}}><i className="fas fa-plus" style={{"padding": "0px 0px 0px 0px"}}></i></button>
                     {
                         (cantidadPedido > 0) && (
-                        <button onClick={() => {setCantidadPedido(cantidadPedido - 1)}} type="button" className="btn btn-dark rounded-circle" style={{"marginRight": "5px"}}><i className="fas fa-minus" style={{"padding": "0px 0px 0px 0px"}}></i></button> 
+                        <button onClick={() => fixPedido('restar')} type="button" className="btn btn-dark rounded-circle" style={{"marginRight": "5px"}}><i className="fas fa-minus" style={{"padding": "0px 0px 0px 0px"}}></i></button> 
                         )
                     }                    
                 

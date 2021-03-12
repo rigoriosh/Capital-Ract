@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useSelector } from 'react-redux';
+import { MenuContext } from '../../context/MenuContext';
 import { CardProducto } from './CardProducto';
 import { Pedido } from './Pedido';
 
@@ -7,7 +8,8 @@ export const MenuFoods = ({history}) => {
     const state = useSelector(state => state);
     const {foodsReducer} = state;
     const {foods} = foodsReducer;
-    console.log(state)
+    const menuContext = useContext(MenuContext);  
+    const {pedido} = menuContext; 
     const goDrinks = () => {
         history.push('/owner/menu/drinks')
     }
@@ -16,12 +18,12 @@ export const MenuFoods = ({history}) => {
             <button type="button" className="btn btn-info btn-block" onClick={goDrinks}>
                 Pedir bebidas <i className="fas fa-glass-cheers"></i>
             </button>
-            <Pedido />
+           {/*  <Pedido pedido={pedido}/> */}
             MenuFoods
             {
                 foods.map(d => {
                     return (                        
-                        <CardProducto key={d.id} producto={d} />
+                        <CardProducto key={d.id} producto={d} menuContext={menuContext}/>
                     )
                 })
             }

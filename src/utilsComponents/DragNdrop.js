@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardProducto } from '../componentes/menu/CardProducto';
+import { CardProductoMuestra } from '../componentes/menu/CardProductoMuestra';
 
 export const DragNdrop = ({color, archivos, setArchivos, fields}) => {
     console.log(fields)
@@ -46,7 +46,7 @@ export const DragNdrop = ({color, archivos, setArchivos, fields}) => {
                 onDrop={dropHandler}
                 onDragOver={dragOverHandler}>
                 <p>Drag and drop image</p>                
-                <CardProducto  producto={producto} />
+                <CardProductoMuestra  producto={producto} />
                 <input id="myimg" type="file" onChange={previewFile} className=""/>
             </div>           
         </>

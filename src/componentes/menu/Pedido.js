@@ -1,6 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-export const Pedido = () => {
+export const Pedido = ({pedido}) => {
+    console.log(pedido)   
+    const [total, setTotal] = useState(0);
+    /* useEffect(() => {
+        const subT = pedido.map(p => {
+            console.log({p});
+            const a = p.productos.map(({cantidad, precioUni}) => {                
+                console.log(cantidad * precioUni);
+                return cantidad * precioUni;
+            })   
+            let t = total;
+            a.forEach(element => {
+                t = t + element;
+            });
+            return t;  
+        })
+
+        console.log(subT[0]);
+        setTotal(subT[0]);
+    }, [pedido, setTotal, total]) */
     return (
         <div className="d-flex mt-4" >  
             <div id="pedidos"  style={{"width": "100%"}}>                                
@@ -9,25 +28,36 @@ export const Pedido = () => {
                 <thead>
                     <tr>            
                     <th scope="col">Ítem</th>
-                    <th scope="col">$</th>          
+                    <th scope="col">V.Unidad</th>          
                     <th scope="col">Cntas</th>
                     <th scope="col">SubT</th>            
                     </tr>
                 </thead>
                 <tbody >
-                    <tr  className="table-active" >
-                    <th scope="row">item.nombre</th>
-                    <td>item.precio</td>
-                    <td>item.cantidad</td>
-                    <td>item.precio item.cantidad</td>
-                    </tr>
+                    {
+                        pedido.map(p => {
+                            return (
+                                p.productos.map(item => {
+                                    return (
+                                        <tr key={Math.random()}  className="table-active" >
+                                            <th scope="row">{item.nameP}</th>
+                                            <td>${item.precioUni}</td>
+                                            <td>{item.cantidad}</td>
+                                            <td>${item.precioUni * item.cantidad}</td>
+                                        </tr>
+                                    )
+                                })  
+                            )                                                      
+                        })
+                    }
+                    
                 </tbody>
                 </table>
 
                 <button type="button" className="btn btn-info btn-block btnPedido" >
-                <i className="fas fa-shopping-cart block" style={{"padding": "0px 1px 0px 5px"}}></i>
-                Realizar pedido
-                <span className="badge badge-dark">$ total</span>
+                    <i className="fas fa-shopping-cart block" style={{"padding": "0px 1px 0px 5px"}}></i>
+                    Realizar pedido
+                    <span className="badge badge-dark">Total: ${total}</span>
                 </button>
             </div>
         </div>
