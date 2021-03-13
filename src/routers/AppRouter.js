@@ -60,7 +60,7 @@ export const AppRouter = ({history}) => {
     return (
         <Router>
             <>
-            <NavBar rol={rol}/>
+                <NavBar rol={rol}/>
                 <Switch>
                     <Route exact path="/we" component={Nosotros} />
                     <Route exact path="/auth" component={AuthScreen} />                    

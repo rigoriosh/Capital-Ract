@@ -70,8 +70,7 @@ export const AddDrinks = ({history}) => {
                                 </td>
                             </tr>
                         ))
-                    }
-                          
+                    } 
                 </tbody>
             </table>
             {

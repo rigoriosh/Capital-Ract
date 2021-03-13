@@ -6,7 +6,7 @@ export const HomeScreen = () => {
         <div className="homeScreem col">
             HomeScreen
 
-            <h3 style={{'color': 'white', 'marginTop': '50px'}}>Quede en menu drinks, ajustar la cantidad de pedidos por 
+            <h3 style={{'color': 'white', 'marginTop': '50px'}}>Continuar con la accion de finalizar pedido, cancelar pedido, ajustar textos segun ubicación.
             producto</h3>
             
         </div>

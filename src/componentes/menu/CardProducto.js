@@ -1,13 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { MenuContext } from '../../context/MenuContext';
 import noimages from '.././/../assets/images/noImages.png';
 
-export const CardProducto = ({producto, menuContext, addPedido}) => {
-    const [cantidadPedido, setCantidadPedido] = useState(0);  
+export const CardProducto = ({producto, updateMenu, setupdateMenu}) => {
+    const [cantidadPedido, setCantidadPedido] = useState(0); 
+    const menuContext = useContext(MenuContext); 
     const {pedido, setPedido} = menuContext;
-    console.log({pedido});
-    console.log({producto})
     
     
+    //console.log({producto})
+    //console.log({menuContext})
+
+    if(pedido.length > 0){
+        const productoPedidoPendiente = pedido.find(e => e.producto.id === producto.id);
+        if (productoPedidoPendiente && (productoPedidoPendiente.cuantasPidieron !== cantidadPedido)) {
+            setCantidadPedido(productoPedidoPendiente.cuantasPidieron)
+        }
+    }
+
     const fixPedido = (action) => {
         let cuantasPidieron = 0;
         if(action === 'sumar'){
@@ -16,11 +26,28 @@ export const CardProducto = ({producto, menuContext, addPedido}) => {
             cuantasPidieron = cantidadPedido - 1;            
         }
         setCantidadPedido(cuantasPidieron);
-        addPedido(producto, cuantasPidieron);
+        
+        const productoSeleccionado = pedido.find(e => e.producto.id === producto.id);            
+        if(productoSeleccionado){
+            const index = pedido.findIndex(e => e.producto.id === producto.id);
+            productoSeleccionado.cuantasPidieron = cuantasPidieron;
+            pedido[index] = productoSeleccionado
+        }else{
+            pedido.push({producto, cuantasPidieron})
+        }            
+        
+        setPedido(pedido);
+
+        setupdateMenu(!updateMenu);
+        //addPedido(producto, cuantasPidieron);
     }
+    
+    
+    
     return (
-        <div className="card cardProducto text-center" style={{'backgroundColor': JSON.parse(producto.color).hex}}>
-                {/* <img src={producto.imagen}  className="card-img-top" alt="Card  cap"/>  */}
+        <>            
+            <div className="card cardProducto text-center mt-1" style={{'backgroundColor': JSON.parse(producto.color).hex}}>
+                {/* <img src={producto.imagen}  className="card-img-top" alt="Card  cap"/>  */}            
                 {
                     (producto.imagen.length === 0) 
                     ? (<img src={noimages} alt="No " />)
@@ -44,5 +71,6 @@ export const CardProducto = ({producto, menuContext, addPedido}) => {
                 
                 </div>
             </div>
+        </>
     )
 }
