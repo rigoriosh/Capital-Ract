@@ -8,7 +8,7 @@
 /* CORE STYLES */
 :root {
     --primary-color: rgba(13, 110, 139, 0.75);
-    --overlay-color: rgba(221, 224, 15, 0.85);
+    --overlay-color: rgba(13, 110, 139, 0.75);
     --menu-speed: 0.75s;
   }
   
@@ -88,7 +88,7 @@
   
   /* MENU STYLES */
   .menu-wrap {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 1;
@@ -212,7 +212,7 @@
     text-align: center;
     max-width: 90vw;
     max-height: 100vh;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.4s ease;
   }
   

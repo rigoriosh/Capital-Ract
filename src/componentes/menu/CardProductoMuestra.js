@@ -6,14 +6,14 @@ export const CardProductoMuestra = ({producto}) => {
     console.log({producto})
     
     return (
-        <div className="card cardProducto text-center" style={{'backgroundColor': JSON.parse(producto.color).hex}}>
+        <div className=" cardProducto text-center" style={{'backgroundColor': JSON.parse(producto.color).hex}}>
             <p>Vista previa</p>
                 {/* <img src={producto.imagen}  className="card-img-top" alt="Card  cap"/>  */}
                 {
                     (producto.imagen.length === 0) 
                     ? (<img src={noimages} alt="No " />)
                     :(
-                        <img height="200" src={producto.imagen} alt="anything"/>  
+                        <img height="200" style={{"maxWidth": "250px"}} src={producto.imagen} alt="anything"/>  
                     )
                 }               
                 <div className="card-body">

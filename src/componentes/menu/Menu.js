@@ -1,19 +1,18 @@
 import React, { useContext, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { MenuContext } from '../../context/MenuContext';
-import { MenuDrinks } from './menuDrinks';
-import { MenuFoods } from './menuFoods';
+import { MenuProducts } from './menuProducts';
+//import { MenuFoods } from './menuFoods';
 import { Pedido } from './Pedido';
 
 export const Menu = ({history}) => {
     const state = useSelector(state => state);    
-    const {drinksReducer, foodsReducer} = state;
+    const {drinksReducer} = state;
     const menuContext = useContext(MenuContext);
     const {pedido} = menuContext;
     const [selecMenu, setSelecMenu] = useState('');    
-    const [updateMenu, setupdateMenu] = useState(false);    
-    const menuDrinks = drinksReducer.drinks;
-    const menuFoods = foodsReducer.foods;
+    const [updateMenu, setupdateMenu] = useState(false);        
+    //const menuFoods = foodsReducer.foods;
     const quitarProductosSinPedidos = (pedido) =>{
         console.log({pedido});
         let itemsAeliminar = [];
@@ -25,13 +24,19 @@ export const Menu = ({history}) => {
         });
         console.log({pedido});
     }
+    const selectTipoDrink = () => {
+        console.log({selecMenu});
+        console.log(drinksReducer.drinks);
+        return drinksReducer.drinks.filter(p => p.idCategoria === selecMenu);        
+    }
+    let menuDrinks = selectTipoDrink();
     quitarProductosSinPedidos(pedido);
     console.log({menuDrinks});
     console.log({menuContext});
     console.log({history});
     
     return (
-        <div className="cardsMenu animated fadeIn faster container mt-5 d-flex flex-column align-items-center">                       
+        <div className="cardsMenu animated fadeIn faster">                       
 
                 {
                     (pedido.length > 0) && (
@@ -42,28 +47,49 @@ export const Menu = ({history}) => {
                 {
                     (selecMenu === '')
                     && (
-                        <div className="col mt-1">        
-                            <div className="alert alert-secondary tex-center" role="alert">Que deseas pedir?</div>                                                
-                            <button onClick={()=>{setSelecMenu('bebidas')}} type="button" className="btn btn-info ">Pedir algo de tomar <i className="fas fa-glass-cheers"></i></button>
-                            <button onClick={()=>{setSelecMenu('comidas')}} type="button" className="btn btn-success ">Pedir algo de comer <i className="fas fa-pizza-slice"></i></button>
+                        <div className="col mt-1" >        
+                            <div className="alert alert-secondary text-center" role="alert">Que deseas pedir?</div>     
+                            <div className="row justify-content-around">                                           
+                                <button onClick={()=>{setSelecMenu('Coffes')}} type="button" className="btn btn-secondary ">Coffes <i className="fas fa-glass-cheers"></i></button>
+                                <button onClick={()=>{setSelecMenu('Drinks')}} type="button" className="btn btn-warning ">Drinks <i className="fas fa-glass-cheers"></i></button>
+                                <button onClick={()=>{setSelecMenu('Foods')}} type="button" className="btn btn-success ">Foods <i className="fas fa-pizza-slice"></i></button>
+                            </div>
                         </div>
                     )
                 }
                 {
-                    (selecMenu === 'bebidas')
+                    (selecMenu === 'Drinks')
                     && (
                         <div className="col">
-                            <button onClick={()=>{setSelecMenu('comidas')}} type="button" className="btn btn-success btn-block">Y despues algo de comer <i className="fas fa-pizza-slice"></i></button>
-                            <MenuDrinks drinks={menuDrinks} updateMenu={updateMenu} setupdateMenu = {setupdateMenu}/>
+                            <div className="row justify-content-end">
+                                <button onClick={()=>{setSelecMenu('Coffes')}} type="button" className="btn btn-secondary ">Coffes <i className="fas fa-glass-cheers"></i></button>
+                                <button onClick={()=>{setSelecMenu('Foods')}} type="button" className="btn btn-success ">Foods <i className="fas fa-pizza-slice"></i></button>
+                            </div>                            
+                            <MenuProducts products={menuDrinks} updateMenu={updateMenu} setupdateMenu = {setupdateMenu}/>
                         </div>
                     )
                 }
                 {
-                    (selecMenu === 'comidas')
+                    (selecMenu === 'Coffes')
                     && (
                         <div className="col">
-                            <button onClick={()=>{setSelecMenu('bebidas')}} type="button" className="btn btn-info btn-block">Y despues algo de tomar<i className="fas fa-glass-cheers"></i></button>
-                            <MenuFoods foods={menuFoods} updateMenu={updateMenu} setupdateMenu = {setupdateMenu}/>
+                            <div className="row justify-content-end">
+                                <button onClick={()=>{setSelecMenu('Drinks')}} type="button" className="btn btn-warning ">Drinks <i className="fas fa-glass-cheers"></i></button>
+                                <button onClick={()=>{setSelecMenu('Foods')}} type="button" className="btn btn-success ">Foods <i className="fas fa-pizza-slice"></i></button>
+                            </div>    
+                            <MenuProducts products={menuDrinks} updateMenu={updateMenu} setupdateMenu = {setupdateMenu}/>
+                        </div>
+                    )
+                }
+                {
+                    (selecMenu === 'Foods')
+                    && (
+                        <div className="col">
+                            <div className="row justify-content-end">
+                                <button onClick={()=>{setSelecMenu('Drinks')}} type="button" className="btn btn-warning ">Drinks <i className="fas fa-glass-cheers"></i></button>
+                                <button onClick={()=>{setSelecMenu('Coffes')}} type="button" className="btn btn-secondary ">Coffes <i className="fas fa-glass-cheers"></i></button>
+                            </div>
+                            <MenuProducts products={menuDrinks} updateMenu={updateMenu} setupdateMenu = {setupdateMenu}/>
                         </div>
                     )
                 }

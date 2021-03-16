@@ -28,8 +28,8 @@ const initialState =
     idDrinkSelected: '',
     categorias: [
         {
-            idCategoria: Math.random(),
-            nombreCategoria: 'Licores',
+            idCategoria: 'Drinks',
+            nombreCategoria: 'Drinks',
             tipos: [
                 {
                     idTipoCateg: Math.random(),
@@ -50,12 +50,20 @@ const initialState =
                 {
                     idTipoCateg: Math.random(),
                     nameTipo: 'Whisquy'
+                },
+                {
+                    idTipoCateg: Math.random(),
+                    nameTipo: 'Vinos'
+                },
+                {
+                    idTipoCateg: Math.random(),
+                    nameTipo: 'Coptel'
                 }
             ]
         },
         {
-            idCategoria: Math.random(),
-            nombreCategoria: 'Calientes',
+            idCategoria: 'Coffes',
+            nombreCategoria: 'Coffe',
             tipos: [
                 {
                     idTipoCateg: Math.random(),
@@ -72,13 +80,7 @@ const initialState =
                 {
                     idTipoCateg: Math.random(),
                     nameTipo: 'Expresso'
-                }
-            ]
-        },
-        {
-            idCategoria: Math.random(),
-            nombreCategoria: 'Frias sin licor',
-            tipos: [
+                },
                 {
                     idTipoCateg: Math.random(),
                     nameTipo: 'Granizado'
@@ -90,6 +92,32 @@ const initialState =
                 {
                     idTipoCateg: Math.random(),
                     nameTipo: 'Milo'
+                }
+            ]
+        },
+        {
+            idCategoria: 'Foods',
+            nombreCategoria: 'Foods',
+            tipos: [
+                {
+                    idTipoCateg: Math.random(),
+                    nameTipo: 'Empanadas de pollo'
+                },
+                {
+                    idTipoCateg: Math.random(),
+                    nameTipo: 'Empanadas de Carne'
+                },
+                {
+                    idTipoCateg: Math.random(),
+                    nameTipo: 'Empanadas de pollo y huevo'
+                },
+                {
+                    idTipoCateg: Math.random(),
+                    nameTipo: 'Empanadas de Champiñones'
+                },
+                {
+                    idTipoCateg: Math.random(),
+                    nameTipo: 'Chicharrones'
                 }
             ]
         }

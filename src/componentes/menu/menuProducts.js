@@ -2,12 +2,12 @@ import React from 'react'
 import { CardProducto } from "./CardProducto";
 
 
-export const MenuDrinks = ({drinks, updateMenu, setupdateMenu}) => {
+export const MenuProducts = ({products, updateMenu, setupdateMenu}) => {
     
     return (
-        <div className="cardsMenu animated fadeIn faster container mt-5 d-flex flex-column align-items-center">           
+        <div className="cardsMenu  mt-5 ">           
             {
-                drinks.map(d => {
+                products.map(d => {
                     return (                        
                         <CardProducto key={d.id} producto={d} updateMenu={updateMenu} setupdateMenu = {setupdateMenu}/>
                     )

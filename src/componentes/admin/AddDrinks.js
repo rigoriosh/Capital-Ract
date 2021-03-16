@@ -31,7 +31,7 @@ export const AddDrinks = ({history}) => {
         console.log(drinksReducer);
     }, [drinksReducer])
     return (
-        <>
+        <div className="container">
             
             <button type="button" className="btn btn-dark btn-block" onClick={regresar}>
                 <i className="fa fa-arrow-left"></i> Return            
@@ -85,6 +85,6 @@ export const AddDrinks = ({history}) => {
             }
 
 
-        </>
+        </div>
     )
 }

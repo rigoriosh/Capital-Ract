@@ -19,12 +19,12 @@ export const NewDrink = ({history}) => {
     const [color, setColor] = useColor("hex", defaultColor);
     let initialState = null;    
     const {ui, drinksReducer} = useSelector(state => state);//ui es para los mensajes de error    
-    const {idSelected, drinks, categorias} = drinksReducer;
+    const {idDrinkSelected, drinks, categorias} = drinksReducer;
     console.log(drinksReducer)
-    if(idSelected !== '' && idSelected !== undefined){
-        console.log({idSelected})
+    if(idDrinkSelected !== '' && idDrinkSelected !== undefined){
+        console.log({idDrinkSelected})
         console.log({drinks})
-        initialState = drinks.find(d => d.id === idSelected)
+        initialState = drinks.find(d => d.id === idDrinkSelected)
         if(archivos.length === 0 && initialState.imagen !== ""){            
             setArchivos(initialState.imagen)
         } 
@@ -60,7 +60,7 @@ export const NewDrink = ({history}) => {
             fields['idKind'] = idKind;
             if(fields.id === '')fields.id = Math.random();
             console.log(fields);
-            (idSelected === '' || idSelected === undefined) ? dispatch(addDrink(fields)) : dispatch(editDrinks(idSelected, fields))
+            (idDrinkSelected === '' || idDrinkSelected === undefined) ? dispatch(addDrink(fields)) : dispatch(editDrinks(idDrinkSelected, fields))
             regresar();
         }
     }
@@ -112,7 +112,7 @@ export const NewDrink = ({history}) => {
     useEffect(() => {       
         console.log(idCategoria)
         if (idCategoria !== 'select...') {
-            const {tipos} = categorias.find(e => e.idCategoria === Number(idCategoria));        
+            const {tipos} = categorias.find(e => e.idCategoria === idCategoria);        
             console.log( tipos)
             setDrinksKinds(tipos)
         }        
@@ -151,7 +151,7 @@ export const NewDrink = ({history}) => {
                         {/* <input type="text" className="form-control" placeholder="Drink category" required name="categoryDrink" value={categoryDrink} onChange={handledInputChange}/> */}
                     </div>
                     <div className="form-group">
-                        <label htmlFor="selectDrinkTip">Drink kind</label>
+                        <label htmlFor="selectDrinkTip">kind</label>
                         <select id="selectDrinkTip" onChange={s => setidKind(s.target.value)} value={idKind} className="form-control">
                             <option value="select...">Select</option>
                             {
